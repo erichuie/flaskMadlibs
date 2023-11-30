@@ -18,11 +18,14 @@ class Story:
         'I love to eat a good mango.'
     """
 
-    def __init__(self, words, text):
+    def __init__(self, type, words, text):
         """Create story with words and template text."""
-
+        self.type = type
         self.prompts = words
         self.template = text
+
+    def getAttributes(self):
+        return {"prompts": {self.prompts}, "template":{self.template}}
 
     def get_result_text(self, answers):
         """Return result text from dictionary of {prompt: answer, ...}."""
@@ -37,7 +40,19 @@ class Story:
 
 # Here's a story to get you started
 
-silly_story = Story(
+silly_story = Story("silly",
+    ["place", "noun", "verb", "adjective", "plural_noun"],
+    """Once upon a time, in a long-ago {place}, there lived an exceptionally
+       {adjective} {noun}. It loved to {verb} with {plural_noun}."""
+)
+
+angry_story = Story("angry",
+    ["place", "noun", "verb", "adjective", "plural_noun"],
+    """Once upon a time, in a long-ago {place}, there lived an exceptionally
+       {adjective} {noun}. It loved to {verb} with {plural_noun}."""
+)
+
+sad_story = Story("sad",
     ["place", "noun", "verb", "adjective", "plural_noun"],
     """Once upon a time, in a long-ago {place}, there lived an exceptionally
        {adjective} {noun}. It loved to {verb} with {plural_noun}."""
@@ -47,6 +62,9 @@ silly_story = Story(
 # and everything should still work
 
 excited_story = Story(
+    "excited",
     ["noun", "verb"],
     """OMG!! OMG!! I love to {verb} a {noun}!"""
 )
+
+stories_list = [silly_story, angry_story, sad_story, excited_story]
